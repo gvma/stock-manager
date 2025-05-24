@@ -4,10 +4,10 @@ use sqlx::PgPool;
 pub struct ItemRepository;
 
 impl ItemRepository {
-    pub async fn listar(pool: &PgPool) -> Result<Vec<Item>, sqlx::Error> {
-        let itens = sqlx::query_as!(Item, "SELECT id, nome FROM items")
+    pub async fn list(pool: &PgPool) -> Result<Vec<Item>, sqlx::Error> {
+        let items = sqlx::query_as!(Item, "SELECT * FROM items ORDER BY name")
             .fetch_all(pool)
             .await?;
-        Ok(itens)
+        Ok(items)
     }
 }

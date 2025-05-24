@@ -4,6 +4,6 @@ use axum::{Extension, Json};
 use sqlx::PgPool;
 
 pub async fn list_items(Extension(pool): Extension<PgPool>) -> Json<Vec<Item>> {
-    let items = ItemRepository::listar(&pool).await.unwrap_or_default();
+    let items = ItemRepository::list(&pool).await.unwrap_or_default();
     Json(items)
 }
