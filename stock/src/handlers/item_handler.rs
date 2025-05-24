@@ -1,4 +1,4 @@
-use crate::domain::models::Item;
+use crate::domain::item::Item;
 use crate::repository::item_repository::ItemRepository;
 use axum::{Extension, Json};
 use sqlx::PgPool;
