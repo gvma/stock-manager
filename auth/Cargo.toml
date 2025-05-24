@@ -13,10 +13,11 @@ chrono = { version = "0.4", features = ["serde"] }
 dotenvy = "0.15.7"
 
 jsonwebtoken = "9.3"
+rand = "0.9"
 
 serde = { version = "1.0", features = ["derive"] }
 
-sqlx = { version = "0.8", features = ["runtime-tokio", "postgres", "macros"] }
+sqlx = { version = "0.8", features = ["runtime-tokio", "postgres", "macros", "chrono"] }
 
 tokio = { version = "1.45", features = ["full"] }
 
