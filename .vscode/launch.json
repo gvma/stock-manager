@@ -1,63 +1,82 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Debug executable 'armazenamento-itens-ms'",
-      "cargo": {
-        "args": [
-          "build",
-          "--bin=armazenamento-itens-ms",
-          "--package=armazenamento-itens-ms"
-        ],
-        "filter": {
-          "name": "armazenamento-itens-ms",
-          "kind": "bin"
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'auth'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=auth",
+                    "--package=auth"
+                ],
+                "filter": {
+                    "name": "auth",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/auth"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'auth'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=auth",
+                    "--package=auth"
+                ],
+                "filter": {
+                    "name": "auth",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/auth"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'manager'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=manager",
+                    "--package=manager"
+                ],
+                "filter": {
+                    "name": "manager",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/manager"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'manager'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=manager",
+                    "--package=manager"
+                ],
+                "filter": {
+                    "name": "manager",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/manager"
         }
-      },
-      "args": [],
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Debug unit tests in executable 'armazenamento-itens-ms'",
-      "cargo": {
-        "args": [
-          "test",
-          "--no-run",
-          "--bin=armazenamento-itens-ms",
-          "--package=armazenamento-itens-ms"
-        ],
-        "filter": {
-          "name": "armazenamento-itens-ms",
-          "kind": "bin"
-        }
-      },
-      "args": [],
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Debug executable 'auth'",
-      "cargo": {
-        "args": [
-          "build",
-          "--bin=auth",
-          "--package=auth"
-        ],
-        "filter": {
-          "name": "auth",
-          "kind": "bin"
-        }
-      },
-      "args": [],
-      "cwd": "${workspaceFolder}"
-    }
-  ]
+    ]
 }
