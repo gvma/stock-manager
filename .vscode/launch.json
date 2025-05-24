@@ -44,39 +44,39 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'manager'",
+            "name": "Debug executable 'stock'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=manager",
-                    "--package=manager"
+                    "--bin=stock",
+                    "--package=stock"
                 ],
                 "filter": {
-                    "name": "manager",
+                    "name": "stock",
                     "kind": "bin"
                 }
             },
             "args": [],
-            "cwd": "${workspaceFolder}/manager"
+            "cwd": "${workspaceFolder}/stock"
         },
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'manager'",
+            "name": "Debug unit tests in executable 'stock'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=manager",
-                    "--package=manager"
+                    "--bin=stock",
+                    "--package=stock"
                 ],
                 "filter": {
-                    "name": "manager",
+                    "name": "stock",
                     "kind": "bin"
                 }
             },
             "args": [],
-            "cwd": "${workspaceFolder}/manager"
+            "cwd": "${workspaceFolder}/stock"
         }
     ]
 }
