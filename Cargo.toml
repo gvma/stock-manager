@@ -1,5 +1,9 @@
+[workspace]
+members = ["auth"]
+resolver = "2"
+
 [package]
-name = "armazenamento-itens-ms"
+name = "stock-manager"
 version = "0.1.0"
 edition = "2024"
 
