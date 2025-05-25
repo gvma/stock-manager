@@ -1,8 +1,8 @@
 use axum::{Extension, Json, http::StatusCode};
 use sqlx::PgPool;
 use bcrypt::{DEFAULT_COST, hash, verify};
-use crate::repository::user_repository::UserRepository;
-use crate::domain::user::{ResetPasswordInput, SignInOutput, User};
+use crate::repository::UserRepository;
+use crate::domain::{ResetPasswordInput, SignInOutput, User};
 
 pub async fn sign_in(Extension(pool): Extension<PgPool>, Json(user): Json<User>) -> Result<Json<SignInOutput>, (StatusCode, String)> {
   match UserRepository::get_by_email(&pool, user.email).await {

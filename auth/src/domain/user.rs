@@ -4,7 +4,7 @@ use chrono::{Duration, NaiveDateTime, TimeDelta, Utc};
 use jsonwebtoken::{encode, EncodingKey, Header};
 use serde::{Serialize, Deserialize};
 
-use super::claims::Claims;
+use super::Claims;
 
 const AUTH_TOKEN_VALIDITY: TimeDelta = Duration::hours(24);
 

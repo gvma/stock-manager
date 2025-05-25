@@ -6,6 +6,7 @@ mod routes;
 
 use axum::Extension;
 use db::start_db_pool;
+use dotenvy::dotenv;
 use routes::routes;
 use tracing_subscriber;
 
@@ -13,6 +14,8 @@ use tracing_subscriber;
 async fn main() {
     // Inicializa os logs
     tracing_subscriber::fmt::init();
+
+    dotenv().ok();
 
     let pool = start_db_pool().await;
 

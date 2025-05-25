@@ -1,4 +1,4 @@
-use crate::domain::item::Item;
+use crate::domain::Item;
 use sqlx::PgPool;
 
 pub struct ItemRepository;

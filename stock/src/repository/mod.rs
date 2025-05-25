@@ -1,1 +1,3 @@
-pub mod item_repository;
+mod item_repository;
+
+pub use item_repository::ItemRepository;

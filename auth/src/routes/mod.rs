@@ -1,4 +1,4 @@
-pub mod user;
+mod user;
 
 use axum::Router;
 

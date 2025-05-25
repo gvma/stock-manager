@@ -1,7 +1,7 @@
 use chrono::{Duration, TimeDelta, Utc};
 use rand::{rng, Rng, distr::Alphanumeric};
 use sqlx::PgPool;
-use crate::domain::user::User;
+use crate::domain::User;
 
 pub struct UserRepository;
 
