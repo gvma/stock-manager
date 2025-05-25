@@ -1,0 +1,28 @@
+[package]
+name = "history"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Web server
+axum = "0.8"
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialização e deserialização
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Logging estruturado
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Requisições HTTP (útil para comunicação entre microsserviços)
+reqwest = { version = "0.11", features = ["json"] }
+
+# DB
+mongodb = "3.2"
+dotenvy = "0.15"
+chrono = { version = "0.4", features = ["serde"] }
+futures-util = "0.3"

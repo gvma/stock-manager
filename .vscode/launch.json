@@ -44,6 +44,43 @@
         {
             "type": "lldb",
             "request": "launch",
+            "name": "Debug executable 'history'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=history",
+                    "--package=history"
+                ],
+                "filter": {
+                    "name": "history",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/history"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'history'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=history",
+                    "--package=history"
+                ],
+                "filter": {
+                    "name": "history",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/history"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
             "name": "Debug executable 'stock'",
             "cargo": {
                 "args": [
