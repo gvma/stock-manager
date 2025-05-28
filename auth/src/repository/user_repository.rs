@@ -1,7 +1,7 @@
-use chrono::{Duration, TimeDelta, Utc};
+use chrono::{Duration, TimeDelta};
 use rand::{rng, Rng, distr::Alphanumeric};
 use sqlx::PgPool;
-use crate::domain::User;
+use crate::domain::{SignUpInput, User};
 
 pub struct UserRepository;
 
@@ -15,7 +15,7 @@ impl UserRepository {
         Ok(user)
     }
 
-    pub async fn create(pool: &PgPool, user: User) -> Result<User, sqlx::Error> {
+    pub async fn create(pool: &PgPool, user: SignUpInput) -> Result<User, sqlx::Error> {
         let user = sqlx::query_as!(
             User,
             "INSERT INTO users (email, name, password) VALUES ($1, $2, $3) RETURNING *",
