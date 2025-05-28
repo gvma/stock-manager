@@ -1,7 +1,7 @@
 mod claims;
 mod user;
+mod events;
 
-pub use user::User;
-pub use user::SignInOutput;
-pub use user::ResetPasswordInput;
-pub use claims::Claims;
+pub use user::*;
+pub use claims::*;
+pub use events::*;

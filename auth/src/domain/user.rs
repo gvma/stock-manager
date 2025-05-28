@@ -1,17 +1,15 @@
-use std::env;
-
-use chrono::{Duration, NaiveDateTime, TimeDelta, Utc};
-use jsonwebtoken::{encode, EncodingKey, Header};
+use chrono::{Duration, NaiveDateTime, TimeDelta};
 use serde::{Serialize, Deserialize};
 
 use super::Claims;
 
 const AUTH_TOKEN_VALIDITY: TimeDelta = Duration::hours(24);
 
-#[derive(Serialize, Deserialize, sqlx::FromRow)]
+#[derive(Serialize, Deserialize, sqlx::FromRow, Clone)]
 pub struct User {
+    pub uuid: String,
+    pub name: String,
     pub email: String,
-    pub name: Option<String>,
 
     #[serde(skip_serializing)]
     pub password: String,
@@ -22,28 +20,34 @@ pub struct User {
     pub password_reset_code_expires_at: Option<NaiveDateTime>
 }
 
-impl User {
-    pub fn to_sign_in_output(&self) -> SignInOutput {
+impl Into<SignInOutput> for User {
+    fn into(self) -> SignInOutput {
         SignInOutput {
+            name: self.name.clone(),
             email: self.email.clone(),
-            name: self.name.clone().unwrap(),
-            token: self.auth_token()
+            token: Claims::from(self).into()
         }
-    }
-    
-    pub fn auth_token(&self) -> String {
-        let claims = Claims { sub: self.email.to_owned(), exp: (Utc::now() + AUTH_TOKEN_VALIDITY).timestamp() as usize };
-        let secret = env::var("TOKEN_ENCRYPT_SECRET").expect("TOKEN_ENCRYPT_SECRET não definido");
-
-        encode(&Header::default(), &claims, &EncodingKey::from_secret(secret.as_ref())).unwrap()
     }
 }
 
 #[derive(Serialize, Deserialize, Default)]
-pub struct SignInOutput {
+pub struct SignInInput {
     pub email: String,
+    pub password: String
+}
+
+#[derive(Serialize, Deserialize, Default)]
+pub struct SignInOutput {
     pub name: String,
+    pub email: String,
     pub token: String
+}
+
+#[derive(Serialize, Deserialize, Default)]
+pub struct SignUpInput {
+    pub name: String,
+    pub email: String,
+    pub password: String
 }
 
 #[derive(Serialize, Deserialize, Default)]
