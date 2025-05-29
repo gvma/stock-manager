@@ -1,4 +1,4 @@
-mod db;
+mod services;
 mod routes;
 mod repository;
 mod domain;
@@ -7,7 +7,7 @@ mod handlers;
 use routes::routes;
 use tracing_subscriber;
 use axum::{Extension};
-use db::{start_db_pool, start_event_queue};
+use services::{Connect, Database, EventQueue};
 use dotenvy::dotenv;
 
 #[tokio::main]
@@ -17,8 +17,8 @@ async fn main() {
     
     dotenv().ok();
 
-    let pool = start_db_pool().await;
-    let queue = start_event_queue().await;
+    let pool = Database::connect().await;
+    let queue = EventQueue::connect().await;
 
     // Constrói as rotas do app com acesso ao DB nas rotas (extension e layer)
     let app = routes().layer(Extension(pool)).layer(Extension(queue));

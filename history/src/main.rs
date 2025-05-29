@@ -1,11 +1,11 @@
-mod db;
+mod services;
 mod domain;
 mod handlers;
 mod repository;
 mod routes;
 
 use axum::Extension;
-use db::start_db_pool;
+use services::{Connect, Database};
 use dotenvy::dotenv;
 use routes::routes;
 use tracing_subscriber;
@@ -17,7 +17,7 @@ async fn main() {
 
     dotenv().ok();
 
-    let pool = start_db_pool().await;
+    let pool = Database::connect().await;
 
     // Constrói as rotas do app com acesso ao DB nas rotas (extension e layer)
     let app = routes().layer(Extension(pool));
