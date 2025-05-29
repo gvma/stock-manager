@@ -1,9 +1,9 @@
 use axum::{Extension, Json, http::StatusCode};
-use lapin::{options::BasicPublishOptions, BasicProperties, Channel};
+use lapin::Channel;
 use sqlx::PgPool;
 use bcrypt::{DEFAULT_COST, hash, verify};
 use crate::repository::UserRepository;
-use crate::domain::{ResetPasswordInput, SignInOutput, SignUpInput, User, UserCreated};
+use crate::domain::{PublishableEvent, ResetPasswordInput, SignInOutput, SignUpInput, User, UserCreated};
 
 pub async fn sign_in(
   Extension(pool): Extension<PgPool>,
@@ -31,21 +31,22 @@ pub async fn sign_up(
   let transaction = pool.begin().await.unwrap();
   match UserRepository::create(&pool, user).await {
     Ok(created_user) => {
-      let event = UserCreated { previous_version: None, current_version: created_user.clone(), actor: created_user.email.clone() };
-      match queue.basic_publish(
-        "",
-        "stock-manager-auth",
-        BasicPublishOptions::default(),
-        &serde_json::to_vec(&event).unwrap(),
-        BasicProperties::default()
-      ).await {
+      let event = UserCreated::new(
+        None,
+        Some(created_user.clone()),
+        created_user.email.clone()
+      );
+
+      println!("{:?}", serde_json::to_string(&event));
+
+      match event.publish(&queue).await {
         Ok(_) => {
           transaction.commit().await.unwrap();
           Ok(Json(created_user))
         },
         Err(_) => {
           transaction.rollback().await.unwrap();
-          todo!("cancel transaction and return error, no user should be created")
+          Err((StatusCode::INTERNAL_SERVER_ERROR, "Erro ao salvar evento de criação de usuário".to_string()))
         }
       }
       
