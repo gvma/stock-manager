@@ -15,12 +15,11 @@ impl Serialize for UserCreated {
         S: Serializer,
     {
         // 6 is the number of fields in the struct.
-        let mut state = serializer.serialize_struct("UserCreated", 6)?;
-        state.serialize_field("collection", "user")?;
-        state.serialize_field("name", "created")?;
+        let mut state = serializer.serialize_struct("UserCreated", 5)?;
+        state.serialize_field("name", "auth:user:created")?;
         state.serialize_field("previous_version", &self.previous_version)?;
         state.serialize_field("current_version", &self.current_version)?;
-        state.serialize_field("occurred_at", &Utc::now().to_string())?;
+        state.serialize_field("occurred_at", &Utc::now().timestamp())?;
         state.serialize_field("actor", &self.actor)?;
         state.end()
     }

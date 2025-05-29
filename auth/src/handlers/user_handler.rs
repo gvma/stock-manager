@@ -33,7 +33,7 @@ pub async fn sign_up(
     Ok(created_user) => {
       let event = UserCreated { previous_version: None, current_version: created_user.clone(), actor: created_user.email.clone() };
       match queue.basic_publish(
-        "history-events",
+        "",
         "stock-manager-auth",
         BasicPublishOptions::default(),
         &serde_json::to_vec(&event).unwrap(),

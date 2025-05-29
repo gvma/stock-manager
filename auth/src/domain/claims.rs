@@ -1,12 +1,12 @@
 use std::env;
 
-use chrono::{Duration, TimeDelta, Utc};
+use chrono::{Duration, Utc};
 use jsonwebtoken::{encode, EncodingKey, Header};
 use serde::{Serialize, Deserialize};
 
 use super::User;
 
-const AUTH_TOKEN_VALIDITY: TimeDelta = Duration::hours(24);
+const AUTH_TOKEN_VALIDITY: Duration = Duration::hours(24);
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {

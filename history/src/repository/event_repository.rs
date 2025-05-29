@@ -9,4 +9,11 @@ impl EventRepository {
 
         events
     }
+
+    pub async fn create(pool: &Database, event: Event) -> Result<Option<Event>, Error> {
+        match pool.collection("events").insert_one(event).await {
+            Ok(data) => pool.collection("events").find_one(doc! { "_id": data.inserted_id }).await,
+            Err(err) => Err(err)
+        }
+    }
 }

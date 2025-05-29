@@ -26,3 +26,4 @@ mongodb = "3.2"
 dotenvy = "0.15"
 chrono = { version = "0.4", features = ["serde"] }
 futures-util = "0.3"
+lapin = "2.5"

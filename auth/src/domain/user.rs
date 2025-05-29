@@ -1,9 +1,7 @@
-use chrono::{Duration, NaiveDateTime, TimeDelta};
+use chrono::{NaiveDateTime};
 use serde::{Serialize, Deserialize};
 
 use super::Claims;
-
-const AUTH_TOKEN_VALIDITY: TimeDelta = Duration::hours(24);
 
 #[derive(Serialize, Deserialize, sqlx::FromRow, Clone)]
 pub struct User {

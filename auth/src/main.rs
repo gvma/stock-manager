@@ -4,6 +4,7 @@ mod repository;
 mod domain;
 mod handlers;
 
+use lapin::{options::QueueDeclareOptions, types::FieldTable};
 use routes::routes;
 use tracing_subscriber;
 use axum::{Extension};
@@ -19,6 +20,8 @@ async fn main() {
 
     let pool = Database::connect().await;
     let queue = EventQueue::connect().await;
+
+    queue.queue_declare("stock-manager-auth", QueueDeclareOptions::default(), FieldTable::default()).await.unwrap();
 
     // Constrói as rotas do app com acesso ao DB nas rotas (extension e layer)
     let app = routes().layer(Extension(pool)).layer(Extension(queue));
