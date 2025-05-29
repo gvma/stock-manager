@@ -7,7 +7,7 @@ pub struct Event {
     pub previous_version: Document,
     pub current_version: Document,
     pub occurred_at: DateTime,
-    pub created_at: DateTime
+    pub actor: String
 }
 
 impl Serialize for Event {
@@ -21,7 +21,7 @@ impl Serialize for Event {
         state.serialize_field("previous_version", &self.previous_version)?;
         state.serialize_field("current_version", &self.current_version)?;
         state.serialize_field("occurred_at", &self.occurred_at.to_string())?;
-        state.serialize_field("created_at", &self.created_at.to_string())?;
+        state.serialize_field("actor", &self.actor)?;
         state.end()
     }
 }
