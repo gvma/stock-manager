@@ -40,11 +40,11 @@ pub async fn sign_up(
         BasicProperties::default()
       ).await {
         Ok(_) => {
-          transaction.commit();
+          transaction.commit().await.unwrap();
           Ok(Json(created_user))
         },
         Err(_) => {
-          transaction.rollback();
+          transaction.rollback().await.unwrap();
           todo!("cancel transaction and return error, no user should be created")
         }
       }

@@ -1,4 +1,4 @@
-use chrono::{Duration, TimeDelta};
+use chrono::{Duration, TimeDelta, Utc};
 use rand::{rng, Rng, distr::Alphanumeric};
 use sqlx::PgPool;
 use crate::domain::{SignUpInput, User};
