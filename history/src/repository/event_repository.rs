@@ -5,9 +5,7 @@ pub struct EventRepository;
 
 impl EventRepository {
     pub async fn list(pool: &Database) -> Result<Cursor<Event>, Error> {
-        let events = pool.collection("events").find(doc! {}).await;
-
-        events
+        pool.collection("events").find(doc! {}).await
     }
 
     pub async fn create(pool: &Database, event: Event) -> Result<Option<Event>, Error> {
