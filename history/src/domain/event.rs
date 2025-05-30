@@ -9,6 +9,6 @@ pub struct Event {
     pub current_version: Document,
     pub actor: String,
 
-    #[serde(deserialize_with = "ts_seconds::deserialize")]
+    #[serde(with = "ts_seconds")]
     pub occurred_at: DateTime<Utc>
 }
